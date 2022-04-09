@@ -1,19 +1,14 @@
+from flask import Flask, request
+from flask_cors import CORS
 import pandas as pd
-from scipy import rand
+import json
 from sklearn.feature_extraction.text import TfidfVectorizer
 from data_preprocessing import clean_text, get_stopwords
 from tf_idf import get_hashtags
 from enter_sentence import add_new_sentence
 
-
-print("Welcome to the hashtag generator!")
-random_sentence = input("Enter any sentence to generate hashtags: ")
-list_random_sentence = []
-list_random_sentence.append(random_sentence)
-
-add_new_sentence(list_random_sentence)
-
-
+app = Flask(__name__)
+CORS(app)
 
 # Reading the sentences in the csv (database) file
 data = pd.read_csv('texts.csv', encoding = "cp1252")
@@ -43,18 +38,18 @@ vectorizer.fit_transform(temp_data[5::])
 # store hashtags
 feature_names = vectorizer.get_feature_names_out()
 
-result = []
-print(get_hashtags(vectorizer, feature_names, random_sentence))
-for sentence in temp_data[0:60]:
-    dataset = {}
-    dataset['user_input_sentence'] = sentence
-    dataset['hashtags'] = get_hashtags(vectorizer, feature_names, sentence)
+@app.route('/')
+def first():
+    return "my world"
 
-    # for hashies in dataset['hashtags']:
-        # hashies = "#" + hashies
-        # print(hashies)
+@app.route('/gethash', methods=['GET', 'POST'])
+def getHashtags():
+    random_sentence = "georgia tech is the best school"
+    list_random_sentence = []
+    list_random_sentence.append(random_sentence)
 
-    result.append(dataset)
+    add_new_sentence(list_random_sentence)
+    return {'sentence': random_sentence ,'hashes': get_hashtags(vectorizer, feature_names, random_sentence)}
 
-final_result = pd.DataFrame(result)
-#print(final_result)
+if __name__ == "__main__":
+    app.run(host="localhost", port=5000, debug=True)
