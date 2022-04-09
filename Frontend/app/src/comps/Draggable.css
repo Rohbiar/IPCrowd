@@ -3,16 +3,16 @@
 }
 
 .Draggable.vertTranslateUp {
-    transition: 2s;
-    -webkit-transition: 2s;
-    -o-transition: 2s;
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -o-transition: 0.5s;
     transform: translateY(-500px);
 }
 
 .Draggable.vertTranslateDown {
-    transition: 2s;
-    -webkit-transition: 2s;
-    -o-transition: 2s;
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -o-transition: 0.5s;
     transform: translateY(-40px);
 }
 .tab {

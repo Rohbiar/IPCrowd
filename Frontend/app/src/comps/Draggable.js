@@ -32,6 +32,23 @@ function Draggable() {
     }
 
     const handleReturnButton = () => {
+        if (sentence != "" && state == 'type') {
+            console.log(sentence)
+            setState("return")
+            async function getBackend() {
+            const res = await fetch('http://localhost:5000/gethash', {
+                method: 'POST',
+                headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json' ,
+                },
+                body: JSON.stringify(sentence),
+                mode: 'cors'
+            }
+            ).then((x) => x.json()).then((y) => console.log(y))
+            }
+            getBackend()
+        }
         toggleDragged()
     }
 

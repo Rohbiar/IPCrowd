@@ -290,9 +290,12 @@ variousest
 variouser
 various
 via
+vis
 vis-a-vis
 vis-a-viser
 vis-a-visest
+viser
+visest
 viz
 very
 veriest
@@ -693,6 +696,7 @@ canted
 co
 could
 couldst
+come
 comeon
 comeons
 come-ons
